@@ -31,7 +31,7 @@ typedef struct {
   int length;
   PlaceType place;
   ExtraInfoType extra;
-  float amount_owed; //maybe float
+  float amount_owed;
 } Boat;
 
 //Array of pointers to boats
@@ -74,7 +74,7 @@ char * placeToString(PlaceType place) {
     }
 }
 
-//Comparison function
+//Comparison function for qsort
 int compare(const void *ptr1, const void *ptr2){
   Boat *boat_1 = *(Boat **)ptr1;
   Boat *boat_2 = *(Boat **)ptr2;
@@ -334,10 +334,10 @@ int main(int argc, char * argv[]) {
 	break;
       case 'x': 
 	saveMarina(argv[1]);
-	//Free allocated memory
+	//Free all memory on exit
 	for (int i = 0; i < MAX_BOATS; i++) {
 	  if (marina[i]) {
-	    free(marina[i]); // Free each dynamically allocated Boat struct
+	    free(marina[i]);
 	  }
 	}	
 	printf("\nExiting the Boat Management System\n");
